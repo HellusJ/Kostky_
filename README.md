@@ -26,7 +26,7 @@
 
 <ul>
   <li> <p>Po každém hodu se ti ukáže jaké čísla jsi hodil a taky kolikrát si <br>
-    hodil určité číslo. Následně tvůj celkový počet bodů za všechny kola</p> </li>
+    hodil určité číslo. Následně tvůj celkový počet bodů za všechny kola (to samé u Vaška)</p> </li>
   
   <li> <p>Také se ti ukáže o kolik bodů vyhráváš případně prohráváš</p> </li>
 </ul>
