@@ -1,6 +1,7 @@
 import random 
 import time as t
 
+
 print("\nVítejte ve hře kostky, kde budete soupeřit proti Vaškovi")
 print("Kdo jako první získá 5000 bodů, tak vyhrává")
 input("Zmáčkněte enter pro pokračování: ")
