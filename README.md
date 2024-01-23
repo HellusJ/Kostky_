@@ -34,4 +34,4 @@
 <h2>Body</h2>
 
 <p>Zde je tabulka s bodovým hodnocením</p>
-<img src = "">
+<img src = "kostky - body.png">
