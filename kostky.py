@@ -2,7 +2,7 @@ import random
 import time as t
 
 print("\nVítejte ve hře kostky, kde budete soupeřit proti Vaškovi")
-print("Kdo jako první získá 7000 bodů, tak vyhrává")
+print("Kdo jako první získá 5000 bodů, tak vyhrává")
 input("Zmáčkněte enter pro pokračování: ")
 
 players_points = 0
@@ -13,16 +13,17 @@ while True:
     print("\nNyní jste na řadě, doporučuji si otevřít v přiloženém souboru pravidla kostek")
     input("zmáčkněte enter pro hození kostek: ")
     print("*kostky vrženy*")
+    t.sleep(2.2)
 
     players_numbers = []
     vasek_numbers = []
 
-    if players_points >= 7000:
-        print("Gratuluji k výhře, dokázal jste jako první získat 7000 bodů")
+    if players_points >= 5000:
+        print("Gratuluji k výhře, dokázal jste jako první získat 5000 bodů")
         break
 
-    if vasek_points >= 7000:
-        print("Prohrál jste, Vašek získal 7000 ale nevadí, můžete to klidně zkusit znovu")
+    if vasek_points >= 5000:
+        print("Prohrál jste, Vašek získal 5000 ale nevadí, můžete to klidně zkusit znovu")
         break
 
     #-------HRACUV TAH-------
@@ -37,7 +38,7 @@ while True:
     if new_numbers == postupka:
         print("padla vám tzv. postupka, gratuluji získáváte 1500 bodů")
         players_numbers += 1500
-    t.sleep(2)
+        t.sleep(2)
 
     #dále
     players_numbers = ''.join(map(str, players_numbers))
@@ -51,6 +52,10 @@ while True:
     pocet_sestek = players_numbers.count("6")
 
     #jednicky
+    if pocet_jednicek == 1:
+        players_points += 100
+    if pocet_jednicek == 2:
+        players_points += 200
     if pocet_jednicek == 3:
         players_points += 1000
     if pocet_jednicek == 4:
@@ -59,25 +64,62 @@ while True:
         players_points += 4000
     if pocet_jednicek == 6:
         players_points += 8000
+    
+    #dvojky
+    if pocet_dvojek == 3:
+        players_points = players_points + (2 * 100)
+    if pocet_dvojek == 4:
+        players_points = players_points + (2 * 200)
+    if pocet_dvojek == 5:
+        players_points = players_points + (2 * 300)
+    if pocet_dvojek == 6:
+        players_points = players_points + (2 * 500)   
+    
+    #trojky
+    if pocet_trojek == 3:
+        players_points = players_points + (3 * 100)
+    if pocet_trojek == 4:
+        players_points = players_points + (3 * 200)
+    if pocet_trojek == 5:
+        players_points = players_points + (3 * 300)
+    if pocet_trojek == 6:
+        players_points = players_points + (3 * 500)
+
+    #ctverky
+    if pocet_ctverek == 3:
+        players_points = players_points + (4 * 100)
+    if pocet_ctverek == 4:
+        players_points = players_points + (4 * 200)
+    if pocet_ctverek == 5:
+        players_points = players_points + (4 * 300)
+    if pocet_ctverek == 6:
+        players_points = players_points + (4 * 500)
 
     #petky
-    for petka in players_numbers:
-        if petka == "5":
-            players_points += 50
+    if pocet_petek == 1:
+        players_points += 50
+    if pocet_petek == 2:
+        players_points += 100
+    if pocet_petek == 3:
+        players_points = players_points + (5 * 100)
+    if pocet_petek == 5:
+        players_points = players_points + (5 * 200)
+    if pocet_petek == 5:
+        players_points = players_points + (5 * 300)
+    if pocet_petek == 6:
+        players_points = players_points + (5 * 500) 
 
-    #jednicky
-    for jednicka in players_numbers:
-        if jednicka == "1":
-            players_points += 100  
+    #sestky
+    if pocet_sestek == 3:
+        players_points = players_points + (6 * 100)
+    if pocet_sestek == 5:
+        players_points = players_points + (6 * 200)
+    if pocet_sestek == 5:
+        players_points = players_points + (6 * 300)
+    if pocet_sestek == 6:
+        players_points = players_points + (6 * 500) 
 
     #3_dvojice
-    pocet = 0
-
-    for z in range(len(players_numbers) - 1):
-        if players_numbers[z] == players_numbers[z + 1]:
-            pocet += 1
-            if pocet == 3:
-                players_points += 1000
 
     #vyhodnoceni hrace
     print(f"Hodil jste {pocet_jednicek}krát číslo 1")
@@ -91,9 +133,17 @@ while True:
     print(f"\nVáš momentální počet bodů: {players_points}")
     t.sleep(2)
 
-    if vasek_points < players_points:
+    #vyhra/prohra
+    if vasek_points > players_points:
+        prohra = (vasek_points - players_points)
+        print(f"Vašek vede o {prohra}")
+
+    elif vasek_points < players_points:
         vyhra = (players_points - vasek_points)
-        print(f"Vedete o {vyhra}")
+        print(f"vedete o {vyhra}")
+
+    else:
+        print("Oba máte stejný počet bodů")
 
     #-------VASKUV TAH-------
     print("\nNyní je na řadě Vašek")
@@ -126,6 +176,10 @@ while True:
     pocet_sestek = vasek_numbers.count("6")
 
     #jednicky
+    if pocet_jednicek == 1:
+        vasek_points += 100
+    if pocet_jednicek == 2:
+        vasek_points += 200
     if pocet_jednicek == 3:
         vasek_points += 1000
     if pocet_jednicek == 4:
@@ -134,25 +188,62 @@ while True:
         vasek_points += 4000
     if pocet_jednicek == 6:
         vasek_points += 8000
+    
+    #dvojky
+    if pocet_dvojek == 3:
+        vasek_points = vasek_points + (2 * 100)
+    if pocet_dvojek == 4:
+        vasek_points = vasek_points + (2 * 200)
+    if pocet_dvojek == 5:
+        vasek_points = vasek_points + (2 * 300)
+    if pocet_dvojek == 6:
+        vasek_points = vasek_points + (2 * 500)   
+    
+    #trojky
+    if pocet_trojek == 3:
+        vasek_points = vasek_points + (3 * 100)
+    if pocet_trojek == 4:
+        vasek_points = vasek_points + (3 * 200)
+    if pocet_trojek == 5:
+        vasek_points = vasek_points + (3 * 300)
+    if pocet_trojek == 6:
+        vasek_points = vasek_points + (3 * 500)
 
-        #petky
-    for petka in vasek_numbers:
-        if petka == "5":
-            vasek_points += 50
+    #ctverky
+    if pocet_ctverek == 3:
+        vasek_points = vasek_points + (4 * 100)
+    if pocet_ctverek == 4:
+        vasek_points = vasek_points + (4 * 200)
+    if pocet_ctverek == 5:
+        vasek_points = vasek_points + (4 * 300)
+    if pocet_ctverek == 6:
+        vasek_points = vasek_points + (4 * 500)
 
-    #jednicky
-    for jednicka in vasek_numbers:
-        if jednicka == "1":
-            vasek_points += 100
+    #petky
+    if pocet_petek == 1:
+        vasek_points += 50
+    if pocet_petek == 2:
+        vasek_points += 100
+    if pocet_petek == 3:
+        vasek_points = vasek_points + (5 * 100)
+    if pocet_petek == 5:
+        vasek_points = vasek_points + (5 * 200)
+    if pocet_petek == 5:
+        vasek_points = vasek_points + (5 * 300)
+    if pocet_petek == 6:
+        vasek_points = vasek_points + (5 * 500)
+
+        #sestky
+    if pocet_sestek == 3:
+        vasek_points = vasek_points + (6 * 100)
+    if pocet_sestek == 5:
+        vasek_points = vasek_points + (6 * 200)
+    if pocet_sestek == 5:
+        vasek_points = vasek_points + (6 * 300)
+    if pocet_sestek == 6:
+        vasek_points = vasek_points + (6 * 500) 
 
     #3_dvojice
-    pocet2 = 0
-
-    for k in range(len(vasek_numbers) - 1):
-        if vasek_numbers[k] == vasek_numbers[k + 1]:
-            pocet2 += 1
-            if pocet2 == 3:
-                vasek_points += 1000
 
     #vyhodnoceni vaška
     print(f"Vašek hodil {pocet_jednicek}krát číslo 1")
@@ -166,9 +257,17 @@ while True:
     print(f"\nVaškův momentální počet bodů: {vasek_points}")
     t.sleep(2)
 
+    #vyhra/prohra
     if vasek_points > players_points:
         prohra = (vasek_points - players_points)
         print(f"Vašek vede o {prohra}")
+
+    elif vasek_points < players_points:
+        vyhra = (players_points - vasek_points)
+        print(f"vedete o {vyhra}")
+
+    else:
+        print("Oba máte stejný počet bodů")
 
     input("Zmáčkněte enter pro pokračování: ")
 
