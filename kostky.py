@@ -1,7 +1,6 @@
 import random 
 import time as t
 
-
 print("\nVítejte ve hře kostky, kde budete soupeřit proti Vaškovi")
 print("Kdo jako první získá 5000 bodů, tak vyhrává")
 input("Zmáčkněte enter pro pokračování: ")
@@ -38,7 +37,7 @@ while True:
 
     if new_numbers == postupka:
         print("padla vám tzv. postupka, gratuluji získáváte 1500 bodů")
-        players_numbers += 1500
+        players_points += 1500
         t.sleep(2)
 
     #dále
@@ -121,6 +120,12 @@ while True:
         players_points = players_points + (6 * 500) 
 
     #3_dvojice
+    dvojices2 = {}
+    for cislo4 in players_numbers:
+        dvojices2[cislo4] = dvojices2[cislo4] + 1 if cislo4 in dvojices2 else 1
+    pocet_dvojic2 = sum(1 for vyskyt in dvojices2.values() if vyskyt == 2)
+    if pocet_dvojic2 >= 3:
+        players_points += 1000
 
     #vyhodnoceni hrace
     print(f"Hodil jste {pocet_jednicek}krát číslo 1")
@@ -151,7 +156,7 @@ while True:
     input("Zmáčkněte enter pro pokračování: ")
 
     print("*Vašek háže*")
-    t.sleep(2)
+    t.sleep(2.2)
 
     for y in range(6):
         number2 = random.randint(1,6)
@@ -245,6 +250,12 @@ while True:
         vasek_points = vasek_points + (6 * 500) 
 
     #3_dvojice
+    dvojices = {}
+    for cislo3 in vasek_numbers:
+        dvojices[cislo3] = dvojices[cislo3] + 1 if cislo3 in dvojices else 1
+    pocet_dvojic = sum(1 for vyskyt in dvojices.values() if vyskyt == 2)
+    if pocet_dvojic >= 3:
+        vasek_points += 1000
 
     #vyhodnoceni vaška
     print(f"Vašek hodil {pocet_jednicek}krát číslo 1")
